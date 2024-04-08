@@ -36,13 +36,13 @@ type VerifyResultData struct {
 }
 
 func (certificate *Certificate) CertificateVerify(in *CertVerifyRequest) (*VerifyResultData, error) {
-	accessToken, err := certificate.GetAccessToken()
-	// fmt.Println(accessToken)
+	clientToken, err := certificate.GetClientToken()
+	// fmt.Println(clientToken)
 	if err != nil {
 		return nil, err
 	}
 	header := map[string]string{
-		"access-token": accessToken,
+		"access-token": clientToken,
 	}
 	res, err := util.PostJSON(certificateVerifyUrl, in, header)
 	if err != nil {

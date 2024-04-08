@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/RichXan/douyin-sdk/open/localLife/context"
+	"github.com/RichXan/douyin-sdk/localLife/context"
 	"github.com/RichXan/douyin-sdk/response"
 	"github.com/RichXan/douyin-sdk/util"
 	"github.com/google/go-querystring/query"
@@ -90,8 +90,8 @@ func NewCertificate(ctx *context.Context) *Certificate {
 }
 
 func (certificate *Certificate) GetCertificate(in *GetCertificateRequest) (*CertificateModel, error) {
-	accessToken, err := certificate.GetAccessToken()
-	// fmt.Println(accessToken)
+	clientToken, err := certificate.GetClientToken()
+	// fmt.Println(clientToken)
 	if err != nil {
 		return nil, err
 	}
@@ -101,7 +101,7 @@ func (certificate *Certificate) GetCertificate(in *GetCertificateRequest) (*Cert
 	}
 	url := fmt.Sprintf("%v?%v", getCertificateURL, params.Encode())
 	header := map[string]string{
-		"access-token": accessToken,
+		"access-token": clientToken,
 	}
 	res, err := util.HTTPGet(url, header)
 	if err != nil {

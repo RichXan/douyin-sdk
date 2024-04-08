@@ -5,8 +5,8 @@ import (
 	"os"
 
 	"github.com/RichXan/douyin-sdk/cache"
-	locallife "github.com/RichXan/douyin-sdk/open/localLife"
-	localLifeConfig "github.com/RichXan/douyin-sdk/open/localLife/config"
+	"github.com/RichXan/douyin-sdk/localLife"
+	"github.com/RichXan/douyin-sdk/localLife/config"
 	"github.com/RichXan/douyin-sdk/util"
 	log "github.com/sirupsen/logrus"
 )
@@ -36,11 +36,11 @@ func (dy *Douyin) SetCache(cache cache.Cache) {
 	dy.cache = cache
 }
 
-func (dy *Douyin) GetLocalLife(cfg *localLifeConfig.Config) *locallife.LocalLife {
+func (dy *Douyin) GetLocalLife(cfg *config.Config) *localLife.LocalLife {
 	if cfg.Cache == nil {
 		cfg.Cache = dy.cache
 	}
-	return locallife.NewLocalLife(cfg)
+	return localLife.NewLocalLife(cfg)
 }
 
 func (dy *Douyin) SetHTTPClient(client *http.Client) {

@@ -57,7 +57,9 @@ func (r *Redis) Get(key string) interface{} {
 
 // GetContext 获取一个值
 func (r *Redis) GetContext(ctx context.Context, key string) interface{} {
-	return r.conn.Get(r.ctx, key)
+	cmd := redis.NewCmd(ctx, "get", key)
+	_ = r.conn.Do(ctx, cmd)
+	return cmd.Val()
 }
 
 // 获取

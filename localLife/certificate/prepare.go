@@ -66,8 +66,8 @@ type PrepareData struct {
 }
 
 func (certificate *Certificate) CertificatePrepare(in *CertPrepareRequest) (*PrepareData, error) {
-	accessToken, err := certificate.GetAccessToken()
-	// fmt.Println(accessToken)
+	clientToken, err := certificate.GetClientToken()
+	// fmt.Println(clientToken)
 	if err != nil {
 		return nil, err
 	}
@@ -78,7 +78,7 @@ func (certificate *Certificate) CertificatePrepare(in *CertPrepareRequest) (*Pre
 	url := fmt.Sprintf("%v?%v", certificatePrepareUrl, params.Encode())
 	fmt.Println(url)
 	header := map[string]string{
-		"access-token": accessToken,
+		"access-token": clientToken,
 	}
 	res, err := util.HTTPGet(url, header)
 	if err != nil {

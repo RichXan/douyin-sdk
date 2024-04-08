@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/RichXan/douyin-sdk/open/localLife/context"
+	"github.com/RichXan/douyin-sdk/localLife/context"
 	"github.com/RichXan/douyin-sdk/response"
 	"github.com/RichXan/douyin-sdk/util"
 	"github.com/google/go-querystring/query"
@@ -38,11 +38,13 @@ type PoiAccount struct {
 }
 
 type Poi struct {
-	PoiID     string  `json:"poi_id"`
-	PoiName   string  `json:"poi_name"`
-	Address   string  `json:"address"`
-	Latitude  float64 `json:"latitude"`
-	Longitude float64 `json:"longitude"`
+	PoiID         string  `json:"poi_id"`
+	PoiName       string  `json:"poi_name"`
+	Address       string  `json:"address"`
+	Latitude      float64 `json:"latitude"`
+	Longitude     float64 `json:"longitude"`
+	SupplierID    string  `json:"supplier_id"`
+	SupplierExtID string  `json:"supplier_ext_id"`
 }
 
 type RootAccount struct {
@@ -83,8 +85,8 @@ func NewShop(context *context.Context) *Shop {
 }
 
 func (shop *Shop) GetShopList(param *ShopQuery) (*ShopList, error) {
-	accessToken, err := shop.GetAccessToken()
-	fmt.Println(accessToken)
+	clientToken, err := shop.GetClientToken()
+	fmt.Println(clientToken)
 	if err != nil {
 		return nil, err
 	}
@@ -95,7 +97,7 @@ func (shop *Shop) GetShopList(param *ShopQuery) (*ShopList, error) {
 	url := fmt.Sprintf("%v?%v", getShopInfoListURL, params.Encode())
 	fmt.Println(url)
 	header := map[string]string{
-		"access-token": accessToken,
+		"access-token": clientToken,
 	}
 	res, err := util.HTTPGet(url, header)
 	if err != nil {
