@@ -137,7 +137,7 @@ type PoiStruct struct {
 	// SupplierExtID 是接入方店铺ID
 	SupplierExtID string `json:"supplier_ext_id"`
 	// POIID 是POI ID
-	POIID int `json:"poi_id,omitempty"`
+	POIID string `json:"poi_id,omitempty"`
 	// SupplierID 是店铺ID
 	SupplierID string `json:"supplier_id"`
 }
